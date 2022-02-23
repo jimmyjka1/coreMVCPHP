@@ -55,7 +55,7 @@
                 die();
             } else {
                 $_SESSION['error'] = "Incorrect Email or Password";
-                header("Location: ".$this -> app_name."?view=login");
+                header("Location: ".$this -> app_name."/login");
                 die();
             }
         }
@@ -87,7 +87,7 @@
                     $user -> save();
                 } catch(Exception $e){
                     $_SESSION['error'] = "Unable to create User. Try again with different email id";
-                    header("Location: ".$this -> app_name . "?view=newuser");
+                    header("Location: ".$this -> app_name . "/newuser");
                     die();
                 }
                 header("Location: " . $this -> app_name);
@@ -95,7 +95,7 @@
 
             } else {
                 $_SESSION['error'] = "All Fields are required";
-                header("Location: " . $this -> app_name . "?view=newuser");
+                header("Location: " . $this -> app_name . "/newuser");
                 die();
             }
 

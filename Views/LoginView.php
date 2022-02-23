@@ -17,7 +17,7 @@
             <input type="password" name="password" id="input_password" class="form-control my-2" placeholder="Enter Password">
             <div class="buttonContainer d-flex justify-content-center align-items-center flex-row">
                 <button type="submit" name="submit" value="login" class="btn btn-primary m -2">Login</button>
-                <a href="<?= $this -> app_name ?>?view=newuser" class="m-2">Create New User</a>
+                <a href="<?= $this -> app_name ?>/newuser" class="m-2">Create New User</a>
             </div>
         </form>
     </div>

@@ -23,7 +23,7 @@
                         <a class="nav-link" aria-current="page" href="<?= $this -> app_name ?>">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= $this -> app_name ?>?view=newuser">Create User</a>
+                        <a class="nav-link" href="<?= $this -> app_name ?>/newuser">Create User</a>
                     </li>
                     <!-- if use is logged in, than drop down will be shown, else login link will be showned  -->
                     <?php
@@ -34,7 +34,7 @@
                                 <?= $this -> user -> first_name . " " . $this -> user -> last_name ?>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="nav-link" href="<?= $this->app_name ?>?view=logout">Logout</a>
+                            <a class="nav-link" href="<?= $this->app_name ?>/logout">Logout</a>
                             </ul>
                         </li>
 
@@ -42,7 +42,7 @@
                     } else {
                     ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= $this->app_name ?>?view=login">Login</a>
+                            <a class="nav-link" href="<?= $this->app_name ?>/login">Login</a>
                         </li>
 
                     <?php

@@ -13,7 +13,7 @@
     <?php
     } else {
     ?>
-        <a class="btn btn-primary" href="<?= $this->app_name ?>?view=login">Login</a>
+        <a class="btn btn-primary" href="<?= $this->app_name ?>/login">Login</a>
     <?php
     }
 
