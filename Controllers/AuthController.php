@@ -26,9 +26,11 @@
 
         // renders login page on the screen
         function loginPage(){
+            unset($_SESSION['user_id']);
             require_once $this -> header;
             require_once $this -> login_page;
             require_once $this -> footer;
+            
         }
 
         // renders newUserPage on the screen 
