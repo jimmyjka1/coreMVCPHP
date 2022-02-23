@@ -34,7 +34,7 @@
 
 
         /**
-         * Save the model to the database. If id is assigned, id is not null, and id is present in database, 
+         * Save the model to the database. If id is assigned & id is not null & id is present in database, then
          * User will be updated, else new user will be created and id for the same will be stored in id attribute 
          * id attribute is optional as when creating new use, you'll not have an id. 
          */
@@ -95,7 +95,7 @@
         }
 
         /**
-         * Static method to get use by id 
+         * Static method to get user by id 
          * 
          * return: UserModel object
          */
