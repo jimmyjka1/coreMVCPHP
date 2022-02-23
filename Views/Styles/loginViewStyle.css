@@ -1,0 +1,15 @@
+.loginContainer {
+    box-shadow: 0px 0px 10px rgba(128, 128, 128, 0.425);
+    width: 30vw;
+    padding: 5px;
+    border-radius: 2vh;
+}
+
+.error {
+    color: red;
+}
+
+input.error, input.error:focus {
+    box-shadow: 0 0 0 0.25rem rgba(253, 13, 13, 0.25);
+    
+}
