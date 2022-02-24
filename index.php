@@ -15,12 +15,12 @@ if ($url == '/'){
     http_response_code(404);
     die();
 }
+    
 
-try{
+try {
     $c_obj = new $controller();
     $c_obj -> $method();
-} catch (Exception $e){
+} catch (\Throwable $th) {
     http_response_code(404);
     die();
 }
-
