@@ -24,21 +24,81 @@
     </div>
     <div class="mt-5 px-5 tableContainer">
         <table class="table">
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
+            <tr class="noselect">
+                <th <?php
+                    if ($sort_column == 'first_name') {
+                        if ($sort_direction == 'ASC') {
+                            echo "onclick='sort(\"first_name\", \"DESC\")'";
+                        } else {
+                            echo "onclick='sort(\"first_name\", \"ASC\")'";
+                        }
+                    } else {
+                        echo "onclick='sort(\"first_name\", \"ASC\")'";
+                    }
+
+                    ?>>First Name
+                    <?php
+                    if ($sort_column == 'first_name') {
+                        if ($sort_direction == 'ASC') {
+                            echo "<i class=\"fa\">&#xf063;</i>";
+                        } else {
+                            echo "<i class=\"fa\">&#xf062;</i>";
+                        }
+                    } 
+                    ?>
+                </th>
+                <th <?php
+                    if ($sort_column == 'last_name') {
+                        if ($sort_direction == 'ASC') {
+                            echo "onclick='sort(\"last_name\", \"DESC\")'";
+                        } else {
+                            echo "onclick='sort(\"last_name\", \"ASC\")'";
+                        }
+                    } else {
+                        echo "onclick='sort(\"last_name\", \"ASC\")'";
+                    }
+
+                    ?>>Last Name
+                    <?php
+                    if ($sort_column == 'last_name') {
+                        if ($sort_direction == 'ASC') {
+                            echo "<i class=\"fa\">&#xf063;</i>";
+                        } else {
+                            echo "<i class=\"fa\">&#xf062;</i>";
+                        }
+                    } 
+                    ?></th>
+                <th <?php
+                    if ($sort_column == 'email') {
+                        if ($sort_direction == 'ASC') {
+                            echo "onclick='sort(\"email\", \"DESC\")'";
+                        } else {
+                            echo "onclick='sort(\"email\", \"ASC\")'";
+                        }
+                    } else {
+                        echo "onclick='sort(\"email\", \"ASC\")'";
+                    }
+
+                    ?>>Email <?php
+                    if ($sort_column == 'email') {
+                        if ($sort_direction == 'ASC') {
+                            echo "<i class=\"fa\">&#xf063;</i>";
+                        } else {
+                            echo "<i class=\"fa\">&#xf062;</i>";
+                        }
+                    } 
+                    ?></th>
             </tr>
             <?php
-            if (count($users) <= 0){
+            if (count($users) <= 0) {
                 echo "<tr><td> No User Found </td></tr>";
             }
             foreach ($users as $user) {
             ?>
                 <tr>
-                    <td><?= $user['first_name'] ?></td>
-                    <td><?= $user['last_name'] ?></td>
-                    <td><?= $user['email'] ?></td>
+                    <td style="width: 20%;"><?= $user['first_name'] ?></td>
+                    <td style="width: 20%;"><?= $user['last_name'] ?></td>
+                    <td style="width: 20%;"><?= $user['email'] ?></td>
                 </tr>
 
             <?php
@@ -50,18 +110,18 @@
             <ul class="pagination noselect">
                 <li class="page-item <?= ($num_location <= 1) ? "disabled" : "" ?>"><a class="page-link" onclick="update_location(<?= $num_location - 1 ?>)">&laquo; Previous</a></li>
 
-                <?php 
-                    for ($i=1; $i <= $num_tabs; $i++) { 
+                <?php
+                for ($i = 1; $i <= $num_tabs; $i++) {
                 ?>
                     <li class="page-item <?= ($num_location == $i) ? "active" : "" ?>"><a class="page-link" onclick="update_location(<?= $i ?>)"><?= $i ?></a></li>
                 <?php
-                    }
+                }
                 ?>
 
-                
-                
-                
-                
+
+
+
+
                 <li class="page-item <?= ($num_location >= $num_tabs) ? "disabled" : "" ?>"><a class="page-link" onclick="update_location(<?= $num_location + 1 ?>)">Next &raquo;</a></li>
             </ul>
         </nav>
@@ -101,9 +161,17 @@
     });
 
 
-    function update_location($num) {
+    function update_location(num) {
         var url = new URL(window.location.href);
-        url.searchParams.set('num_location', $num);
+        url.searchParams.set('num_location', num);
+        document.location = url.href;
+    }
+
+
+    function sort(column_name, direction) {
+        var url = new URL(window.location.href);
+        url.searchParams.set('sort_column', column_name);
+        url.searchParams.set('sort_direction', direction);
         document.location = url.href;
     }
 </script>

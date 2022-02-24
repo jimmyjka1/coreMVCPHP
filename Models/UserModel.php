@@ -210,23 +210,30 @@
 
         /**
          * Returns all users as an associative array, with given offset
-         * and limit. Also it searches for $search text in first_name and last_name
+         * and limit. Also it searches for $search text in first_name and last_name. 
+         * it also takes sort column and sort direction, according to which order is decided
          * 
          * return: array of arrays(rows). 
          */
-        public static function getAllUsers($offset, $limit, $search){
+        public static function getAllUsers($offset, $limit, $search, $sort_column, $sort_direction){
             $search_condition = "";
             $params = [];
             if (!empty(trim($search))){
                 $txt = '%'.$search.'%';
-                $search_condition = "WHERE (first_name LIKE :str) || (last_name LIKE :str)";
+                $search_condition = "WHERE (first_name LIKE :str) || (last_name LIKE :str) || (email LIKE :str)";
                 $params = [':str' => $txt];
 
             }
 
 
-            $query = "SELECT * FROM `user` $search_condition LIMIT $offset ,$limit";
-            $result = executeQueryResult(self::conn(), $query, $params);
+            $query = "SELECT * FROM `user` $search_condition ORDER BY $sort_column $sort_direction LIMIT $offset ,$limit";
+            try {
+                $result = executeQueryResult(self::conn(), $query, $params);
+            } catch (Exception $e) {
+                http_response_code(404);
+                die();
+            }
+            
             return $result;
         }
 
@@ -243,7 +250,7 @@
             $params = [];
             if (!empty(trim($search))){
                 $txt = '%'.$search.'%';
-                $search_condition = " WHERE (first_name LIKE :str) || (last_name LIKE :str)";
+                $search_condition = " WHERE (first_name LIKE :str) || (last_name LIKE :str) || (email LIKE :str)";
                 $params = [':str' => $txt];
 
             }

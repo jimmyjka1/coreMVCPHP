@@ -77,15 +77,20 @@
          */
         function allUsersPage(){
 
+
             $num_rows = (isset($_GET['num_rows'])) ? $_GET['num_rows'] : '10';
             $search = (isset($_GET['search'])) ? $_GET['search'] : '';
             $num_location = (isset($_GET['num_location'])) ? $_GET['num_location'] : '1';
-
+            
+            // by default, first name is sorted in ascending order
+            $sort_column = (isset($_GET['sort_column'])) ? $_GET['sort_column'] : 'first_name';
+            $sort_direction = (isset($_GET['sort_direction'])) ? $_GET['sort_direction'] : "ASC";
+ 
             $user_count = UserModel::getUserCount($search);
 
-
-            $num_tabs = ceil($user_count / $num_rows);
-
+            
+            $num_tabs = ($num_rows > 0) ? ceil($user_count / $num_rows): http_response_code(404) && die();
+            
             $num_tabs = ($num_tabs) ? $num_tabs : 1;
 
             if ($num_location > $num_tabs || $num_location <= 0){
@@ -96,7 +101,7 @@
             $offset = ($num_location - 1) * $num_rows;
             $limit = $num_rows;
 
-            $users = UserModel::getAllUsers($offset, $limit, $search);
+            $users = UserModel::getAllUsers($offset, $limit, $search, $sort_column, $sort_direction);
             
 
 
