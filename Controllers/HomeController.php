@@ -28,7 +28,7 @@
         }
 
         // renders home page on the screen
-        function showHomePage(){
+        function home(){
             require_once $this -> header;
             require_once $this -> home_page;
             require_once $this -> footer;

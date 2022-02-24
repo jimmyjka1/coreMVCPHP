@@ -33,12 +33,6 @@
             
         }
 
-        // renders newUserPage on the screen 
-        function newUserPage(){
-            require_once $this -> header;
-            require_once $this -> new_user_page;
-            require_once $this -> footer;
-        }
 
         /**
          * login checks email and password parameter from post.
@@ -55,7 +49,7 @@
                 die();
             } else {
                 $_SESSION['error'] = "Incorrect Email or Password";
-                header("Location: ".$this -> app_name."/login");
+                header("Location: ".$this -> app_name."/Auth/loginPage");
                 die();
             }
         }
@@ -68,40 +62,7 @@
             die();
         }
 
-        /**
-         * createNewUser method takes all user details from post, and stores it in user model.
-         * 
-         * if some error occures, then user gets redirectd to newuser page
-         * 
-         */
-        function createNewUser(){
-            $first_name = $_POST['first_name'];
-            $last_name = $_POST['last_name'];
-            $password = $_POST['password'];
-            $email = $_POST['email'];
-
-
-            if (strlen($first_name) > 0 && strlen($last_name) > 0 && strlen($password) > 0 && strlen($email) > 0 ){
-                $user = new UserModel($first_name, $last_name, $email, $password);
-                try{
-                    $user -> save();
-                } catch(Exception $e){
-                    $_SESSION['error'] = "Unable to create User. Try again with different email id";
-                    header("Location: ".$this -> app_name . "/newuser");
-                    die();
-                }
-                header("Location: " . $this -> app_name);
-                die();
-
-            } else {
-                $_SESSION['error'] = "All Fields are required";
-                header("Location: " . $this -> app_name . "/newuser");
-                die();
-            }
-
-
-        }
-
+        
 
 
 

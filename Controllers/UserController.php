@@ -54,7 +54,7 @@
                     $user -> save();
                 } catch(Exception $e){
                     $_SESSION['error'] = "Unable to create User. Try again with different email id";
-                    header("Location: ".$this -> app_name . "/newuser");
+                    header("Location: ".$this -> app_name . "/User/newUserPage");
                     die();
                 }
                 header("Location: " . $this -> app_name);
@@ -62,7 +62,7 @@
 
             } else {
                 $_SESSION['error'] = "All Fields are required";
-                header("Location: " . $this -> app_name . "/newuser");
+                header("Location: " . $this -> app_name . "/User/newUserPage");
                 die();
             }
 

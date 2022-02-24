@@ -239,7 +239,7 @@
 
         /**
          * Function to get count of all users. takes in optional $search 
-         * parameter, if set, then count of the rows satisfying that consition 
+         * parameter, if set, then count of the rows satisfying that conditino 
          * will be only returned
          * 
          * return: number
