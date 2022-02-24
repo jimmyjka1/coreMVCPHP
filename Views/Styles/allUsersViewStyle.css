@@ -3,7 +3,7 @@
     border-radius: 1vh;
 }
 
-.page-item {
+.page-item:not(.disabled) {
     cursor: pointer;
 }
 
