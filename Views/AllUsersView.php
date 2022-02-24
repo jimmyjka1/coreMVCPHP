@@ -48,7 +48,7 @@
         </table>
         <nav>
             <ul class="pagination noselect">
-                <li class="page-item <?= ($num_location <= 1) ? "disabled" : "" ?>"><a class="page-link" onclick="update_location(<?= $num_location - 1 ?>)">Previous</a></li>
+                <li class="page-item <?= ($num_location <= 1) ? "disabled" : "" ?>"><a class="page-link" onclick="update_location(<?= $num_location - 1 ?>)">&laquo; Previous</a></li>
 
                 <?php 
                     for ($i=1; $i <= $num_tabs; $i++) { 
@@ -62,7 +62,7 @@
                 
                 
                 
-                <li class="page-item <?= ($num_location >= $num_tabs) ? "disabled" : "" ?>"><a class="page-link" onclick="update_location(<?= $num_location + 1 ?>)">Next</a></li>
+                <li class="page-item <?= ($num_location >= $num_tabs) ? "disabled" : "" ?>"><a class="page-link" onclick="update_location(<?= $num_location + 1 ?>)">Next &raquo;</a></li>
             </ul>
         </nav>
 
