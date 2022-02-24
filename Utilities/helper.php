@@ -19,6 +19,9 @@
     require_once $base_path . "/Controllers/AuthController.php";
     require_once $base_path . "/Controllers/UserController.php";
 
+
+    require_once $base_path . "/Controllers/Routing.php";
+
     // flag to set if passwords needs to be hashed or not 
     $useHashedPassword = false;
     
