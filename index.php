@@ -1,9 +1,10 @@
 <?php
 
 
-require_once "./Utilities/helper.php";
+require_once "./Utilities/Helper.php";
 $auth_controller = new AuthController();
 $home_controller = new HomeController();
+$user_controller = new UserController();
 
 $url = isset($_SERVER['PATH_INFO']) ? explode('/', ltrim($_SERVER['PATH_INFO'], '/')) : '/';
 
@@ -19,8 +20,15 @@ if ($url === '/') {
             $auth_controller->logout();
             break;
         case 'newuser':
-            $auth_controller->newUserPage();
+            $user_controller->newUserPage();
             break;
+        case 'users':
+            if (!isset($url[1])){
+                $user_controller -> allUsersPage();
+            } else {
+                http_response_code(404);
+                die();
+            }
         default:
             http_response_code(404);
             die();

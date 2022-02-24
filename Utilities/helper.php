@@ -17,7 +17,7 @@
     // importing all Controllers 
     require_once $base_path . "/Controllers/HomeController.php";
     require_once $base_path . "/Controllers/AuthController.php";
-
+    require_once $base_path . "/Controllers/UserController.php";
 
     // flag to set if passwords needs to be hashed or not 
     $useHashedPassword = false;

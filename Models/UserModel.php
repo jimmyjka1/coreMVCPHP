@@ -61,7 +61,7 @@
                     ':ln' => $this -> last_name,
                     ':fn' => $this -> first_name,
                     ':em' => $this -> email,
-                    'pass' => $this -> password,
+                    ':pass' => $this -> password,
                 ];
 
                 $res = executeQuery($db_conn, $query, $params);
@@ -205,6 +205,54 @@
             } else {
                 return $password;
             }
+        }
+
+
+        /**
+         * Returns all users as an associative array, with given offset
+         * and limit. Also it searches for $search text in first_name and last_name
+         * 
+         * return: array of arrays(rows). 
+         */
+        public static function getAllUsers($offset, $limit, $search){
+            $search_condition = "";
+            $params = [];
+            if (!empty(trim($search))){
+                $txt = '%'.$search.'%';
+                $search_condition = "WHERE (first_name LIKE :str) || (last_name LIKE :str)";
+                $params = [':str' => $txt];
+
+            }
+
+
+            $query = "SELECT * FROM `user` $search_condition LIMIT $offset ,$limit";
+            $result = executeQueryResult(self::conn(), $query, $params);
+            return $result;
+        }
+
+        /**
+         * Function to get count of all users. takes in optional $search 
+         * parameter, if set, then count of the rows satisfying that consition 
+         * will be only returned
+         * 
+         * return: number
+         */
+        public static function getUserCount($search = ''){
+            $query = "SELECT count(*) as count FROM `User`";
+            $search_condition = "";
+            $params = [];
+            if (!empty(trim($search))){
+                $txt = '%'.$search.'%';
+                $search_condition = " WHERE (first_name LIKE :str) || (last_name LIKE :str)";
+                $params = [':str' => $txt];
+
+            }
+
+            $query .= $search_condition;
+
+
+
+            return executeQueryResult(self::conn(), $query, $params)[0]['count'];
         }
 
     }
