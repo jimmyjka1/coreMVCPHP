@@ -23,8 +23,8 @@
 
             $sort_columns = $data['sort_columns'] ?? [];
             $sort_direction = $data['sort_direction'] ?? [];
-
             
+
             
 
 

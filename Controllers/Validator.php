@@ -71,7 +71,7 @@
 
 
                 
-                $this -> validate_param($value, $parameters);
+                $res = $this -> validate_param($value, $parameters);
             }
         }
 
