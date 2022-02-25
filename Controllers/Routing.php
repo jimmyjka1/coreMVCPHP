@@ -1,6 +1,18 @@
 <?php 
 
+
+    /**
+     * This list will store routes in form ['url' => $data] - where data is the array passed in Route method.
+     * It'll be used by ParseURL method
+     */
     $route_list = [];
+    /**
+     * If name is passed in Route method, then that route will be added to this list. 
+     * This list will look like 
+     * ['name' => $data]
+     * 
+     * It'll be used by ReverseURL method
+     */
     $reverse_routing_list = [];
 
     
