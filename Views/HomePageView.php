@@ -13,7 +13,7 @@
     <?php
     } else {
     ?>
-        <a class="btn btn-primary" href="<?= $this->app_name ?>/Auth/loginPage">Login</a>
+        <a class="btn btn-primary" href="<?= ReverseURL('Auth.login_page') ?>">Login</a>
     <?php
     }
 

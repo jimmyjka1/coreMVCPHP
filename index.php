@@ -2,33 +2,19 @@
 
 
 require_once "./Utilities/Helper.php";
-// var_dump($_SERVER['PATH_INFO']);
+$url = $_SERVER['PATH_INFO'] ?? '/';
+
+// Route(pattern, controller, method, [name])
+Route(['pattern' => "/", "controller" => "HomeController", "method" => "home", "name" => "home"]);
+Route(['pattern' => "/Auth/loginPage","controller" => "AuthController", "method" => "loginPage", "name" => "Auth.login_page"]);
+Route(['pattern' => "/Auth/login","controller" => "AuthController", "method" => "login", "name" => "Auth.login"]);
+Route(['pattern' => "/Auth/logout","controller" => "AuthController", "method" => "logout", "name" => "Auth.logout"]);
+Route(['pattern' => "/User/newUserPage", "controller" => "UserController",  "method" => "newUserPage", "name" => "User.new_user_page"]);
+Route(['pattern' => "/User/createNewUser", "controller" => "UserController",  "method" => "createNewUser", "name" => "User.create_new_user"]);
+Route(['pattern' => "/User/allUsersPage", "controller" => "UserController",  "method" => "allUsersPage", "name" => "User.all_users"]);
 
 
-$url = isset($_SERVER['PATH_INFO']) ? explode('/', ltrim($_SERVER['PATH_INFO'], '/')) : '/';
 
-// if ($url == '/'){
-//     $controller = "HomeController";
-//     $method = "home";
-// } else if (isset($url[0]) && isset($url[1])){
-//         $controller = $url[0]."Controller";
-//         $method = $url[1];
-// } else {
-//     http_response_code(404);
-//     die();
-// }
-    
-
-// try {
-//     $c_obj = new $controller();
-//     $c_obj -> $method();
-// } catch (\Throwable $th) {
-//     http_response_code(404);
-//     die();
-// }
-
-Route("/","HomeController","home");
-Route("/Auth/loginPage","AuthController","loginPage");
-Route("/Auth/login","AuthController","loginPage");
-Route("/Auth/logout","AuthController","loginPage");
-var_dump($route_list);
+ParseURL($url);
+// var_dump(ReverseURL('home'));
+// var_dump(ReverseURL('Auth.login_page'));

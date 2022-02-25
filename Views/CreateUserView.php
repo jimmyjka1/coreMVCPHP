@@ -3,7 +3,7 @@
     <div class="loginContainer">
         <h1 class="text-center pt-3">Create New User</h1>
 
-        <form class="loginForm p-5" action="<?= $this -> app_name ?>/User/createNewUser" method="POST" id="createUserForm">
+        <form class="loginForm p-5" action="<?= ReverseURL('User.create_new_user') ?>" method="POST" id="createUserForm">
             <div style="color: red">
                 <?php
                 if (isset($_SESSION['error'])) {
@@ -18,7 +18,7 @@
             <input type="password" name="password" id="input_password" class="form-control my-2" placeholder="Enter Password">
             <div class="buttonContainer d-flex justify-content-center align-items-center flex-row">
                 <button type="submit" name="submit" value="newuser" class="btn btn-primary m -2">Create New User</button>
-                <a href="<?= $this -> app_name ?>/Auth/loginPage" class="m-2">Already have account? Login</a>
+                <a href="<?= ReverseURL('Auth.login_page') ?>" class="m-2">Already have account? Login</a>
             </div>
         </form>
     </div>
