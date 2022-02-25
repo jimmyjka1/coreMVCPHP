@@ -1,6 +1,6 @@
 <?php 
 
-
+    $middleware_controller = new MiddlewareController();
     /**
      * This list will store routes in form ['url' => $data] - where data is the array passed in Route method.
      * It'll be used by ParseURL method
@@ -29,14 +29,14 @@
     function Route($data){
         global $route_list, $reverse_routing_list;
 
-        if (!isset($data["pattern"]) || !isset($data["controller"]) || !isset($data["method"])){
+        if (!isset($data[0]) || !isset($data[1]) || !isset($data[2])){
             throw new Exception("Please provide all three - url pattern, Controller name, and method name required", 1);
         }
 
-        $route_list[$data["pattern"]] = $data;
+        $route_list[$data[0]] = $data;
 
-        if (isset($data["name"])){
-            $reverse_routing_list[$data["name"]] = $data;
+        if (isset($data[3])){
+            $reverse_routing_list[$data[3]] = $data;
         }
 
     }
@@ -49,11 +49,18 @@
      * IF that pattern is not present in rout_list, then response codd 404 is returned. 
      */
     function ParseURL($url){
-        global $route_list;
+        global $route_list, $middleware_controller, $app_name;
         if (isset($route_list[$url])){
 
-            $controller = $route_list[$url]["controller"];
-            $method = $route_list[$url]["method"];
+
+            /**
+             * If requirments key is defined, that key's value in middleware_controller
+             */
+            if (isset($route_list[$url]['requirements'])){
+                $middleware_controller -> validate($route_list[$url]['requirements'], $app_name . $url);
+            }
+            $controller = $route_list[$url][1];
+            $method = $route_list[$url][2];
 
 
             $cnt_object = new $controller();
@@ -70,5 +77,5 @@
      */
     function ReverseURL($name){
         global $app_name, $reverse_routing_list;
-        return $app_name . $reverse_routing_list[$name]["pattern"];
+        return $app_name . $reverse_routing_list[$name][0];
     }

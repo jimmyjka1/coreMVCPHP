@@ -5,13 +5,13 @@ require_once "./Utilities/Helper.php";
 $url = $_SERVER['PATH_INFO'] ?? '/';
 
 // Route(pattern, controller, method, [name])
-Route(['pattern' => "/", "controller" => "HomeController", "method" => "home", "name" => "home"]);
-Route(['pattern' => "/Auth/loginPage","controller" => "AuthController", "method" => "loginPage", "name" => "Auth.login_page"]);
-Route(['pattern' => "/Auth/login","controller" => "AuthController", "method" => "login", "name" => "Auth.login"]);
-Route(['pattern' => "/Auth/logout","controller" => "AuthController", "method" => "logout", "name" => "Auth.logout"]);
-Route(['pattern' => "/User/newUserPage", "controller" => "UserController",  "method" => "newUserPage", "name" => "User.new_user_page"]);
-Route(['pattern' => "/User/createNewUser", "controller" => "UserController",  "method" => "createNewUser", "name" => "User.create_new_user"]);
-Route(['pattern' => "/User/allUsersPage", "controller" => "UserController",  "method" => "allUsersPage", "name" => "User.all_users"]);
+Route(["/", "HomeController", "home", "home"]);
+Route(["/Auth/loginPagePratyush", "AuthController", "loginPage", "Auth.login_page"]);
+Route(["/Auth/login", "AuthController", "login", "Auth.login"]);
+Route(["/Auth/logout", "AuthController", "logout", "Auth.logout"]);
+Route(["/User/newUserPage", "UserController", "newUserPage", "User.new_user_page","requirements" => ["login_required"]]);
+Route(["/User/createNewUser", "UserController", "createNewUser", "User.create_new_user", "requirements" => ["login_required"]]);
+Route(["/User/allUsersPage", "UserController", "allUsersPage", "User.all_users"]);
 
 
 

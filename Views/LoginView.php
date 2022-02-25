@@ -15,6 +15,7 @@
             
             <input type="email" name="email" id="input_email" class="form-control my-2" placeholder="Enter Email ID">
             <input type="password" name="password" id="input_password" class="form-control my-2" placeholder="Enter Password">
+            <input type="hidden" name="nextURL" value="<?= $nextURL ?>">
             <div class="buttonContainer d-flex justify-content-center align-items-center flex-row">
                 <button type="submit" name="submit" value="login" class="btn btn-primary m -2">Login</button>
                 <a href="<?= ReverseURL("User.new_user_page") ?>" class="m-2">Create New User</a>

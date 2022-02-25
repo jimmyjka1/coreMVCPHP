@@ -12,13 +12,14 @@
 
     // import all Models 
     require_once $base_path . "/Models/UserModel.php";
-
+    require_once $base_path . "/Models/DatabaseHelper.php";
 
     // importing all Controllers 
     require_once $base_path . "/Controllers/HomeController.php";
     require_once $base_path . "/Controllers/AuthController.php";
     require_once $base_path . "/Controllers/UserController.php";
-
+    require_once $base_path . "/Controllers/MiddlewareController.php";
+    require_once $base_path . "/Controllers/Validator.php";
 
     require_once $base_path . "/Controllers/Routing.php";
 

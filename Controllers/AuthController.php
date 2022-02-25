@@ -24,32 +24,49 @@
             }
         }
 
-        // renders login page on the screen
-        function loginPage(){
+        /** 
+         *  renders login page on the screen.
+         *  
+         * this method also takes nextURL parameter, which will stored in login form as hidden input field.
+         * 
+         */
+        function loginPage($nextURL = ""){
+            $nextURL = ($nextURL != "") ? $nextURL : $this -> app_name;
             unset($_SESSION['user_id']);
             require_once $this -> header;
             require_once $this -> login_page;
             require_once $this -> footer;
-            
         }
 
 
         /**
          * login checks email and password parameter from post.
-         * if user successfully logs in, their user_id is sotred in session then they are redirected to home page 
+         * if user successfully logs in, their user_id is sotred in session then they are redirected 
          * else error message is shown. 
+         * 
+         * 
+         * If user has successfully logged in , then they are redirected to the url stored in nextURL hidden
+         * input field, else to the homepage.
          */
         function login(){
+            
             $email = $_POST['email'];
             $password = $_POST['password'];
+
             $user = UserModel::isEmailPassValid($email, $password);
             if ($user){
                 $_SESSION['user_id'] = $user -> id;
-                header("Location: ". $this -> app_name);
+
+                if (isset($_POST['nextURL'])){
+                    header("Location: ". $_POST['nextURL']);
+                } else {
+                    header("Location: ". ReverseURL("home"));
+                }
+
                 die();
             } else {
                 $_SESSION['error'] = "Incorrect Email or Password";
-                header("Location: ".$this -> app_name."/Auth/loginPage");
+                header("Location: ".ReverseURL('Auth.login_page'));
                 die();
             }
         }
@@ -58,7 +75,7 @@
         function logout(){
             session_destroy();
             session_start();
-            header("Location: ".$this -> app_name);
+            header("Location: ".ReverseURL("home"));
             die();
         }
 

@@ -42,6 +42,24 @@
          * 
          */
         function createNewUser(){
+            $validator = new Validator();
+            $validator -> validate([
+                'POST' => [
+                    'first_name' => [
+                        'max_length' => 30,
+                        'min_length' => 3
+                    ],
+                    'last_name' => [
+                        'max_length' => 30,
+                        'min_length' => 3
+                    ],
+                    'password' => [
+                        'min_length' => 8,
+                    ],
+                    'email' => []
+                ]
+            ]);
+
             $first_name = $_POST['first_name'];
             $last_name = $_POST['last_name'];
             $password = $_POST['password'];
@@ -54,15 +72,15 @@
                     $user -> save();
                 } catch(Exception $e){
                     $_SESSION['error'] = "Unable to create User. Try again with different email id";
-                    header("Location: ".$this -> app_name . "/User/newUserPage");
+                    header("Location: ".ReverseURL("User.new_user_page"));
                     die();
                 }
-                header("Location: " . $this -> app_name);
+                header("Location: " . ReverseURL("home"));
                 die();
 
             } else {
                 $_SESSION['error'] = "All Fields are required";
-                header("Location: " . $this -> app_name . "/User/newUserPage");
+                header("Location: " . ReverseURL("User.new_user_page"));
                 die();
             }
 
