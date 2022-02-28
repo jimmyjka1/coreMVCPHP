@@ -88,6 +88,11 @@
     }
 
 
+    function joinKeysValues($key, $value){
+        return $key . " => " . $value;
+    }
+
+
     
 
 
