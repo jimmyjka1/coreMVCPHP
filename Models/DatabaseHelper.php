@@ -54,7 +54,7 @@
 
 
         function update($data){
-            $table = isset($data['table']) ? $data['table'] : throw new Exception("Please provide column name", 1);
+            $table = isset($data['table']) ? "`".$data['table']."`" : throw new Exception("Please provide column name", 1);
             
 
 
@@ -65,8 +65,17 @@
             array_walk($values, function(&$key, $value){
                 $this -> joinKeysValues($key, $value, "=");
             });
+
+            $values = join(", ", $values);
             
-            var_dump($values);
+            if (strlen($condition) > 0){
+                $condition = " WHERE ".$condition;
+            }
+
+            $query = "UPDATE $table SET " . $values . $condition;
+
+
+            var_dump($query);
 
 
         }   
